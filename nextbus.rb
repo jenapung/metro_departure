@@ -51,9 +51,6 @@ end
 def validate_arguments
   # Total number of arguments must 3
   raise 'Incorrect number of arguments given. Expecting 3 arguments' unless ARGV.length == 3
-  # First two arguments must be strings
-  raise 'Route argument must be given as a string' unless ARGV[0].is_a?(String)
-  raise 'Stop argument must be given as a string' unless ARGV[1].is_a?(String)
   # Last argument must be either 'north', 'south', 'east', or 'west' (not case sensitive)
   raise 'Invalid direction given. Must be either north, south, east, or west' unless ACCEPTED_DIRECTIONS.include?(ARGV[2].downcase)
 end
