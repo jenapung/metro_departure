@@ -72,6 +72,8 @@ This was done using regexp to only retrieve the milliseconds value encapsulated 
 def datetime_from_departure(route, direction, stop)
   # Get the departure information retrieved from the API as a hash
   info = departure_info(route, direction, stop)[0]
+  # Raise an error if the last bus for the day has already left
+  raise 'Last bus for the day has already left' if info.nil?
   # Strip the milliseconds and timezone from the departure time value
   stripped_time = info['DepartureTime'][/Date\((.*)\)/, 1]
   # Return the stripped time in a datetime format
@@ -88,8 +90,6 @@ I calculated the difference in seconds, then got minutes by dividing the seconds
 # @params stop - the stop ID (eg. 'FAIR')
 def difference_in_time(route, direction, stop)
   departure_time = datetime_from_departure(route, direction, stop)
-  # Raise an error if the last bus for the day has already left
-  raise 'Last bus for the day has already left' unless Date.today.day == departure_time.day
   # Get the difference in seconds between the two dates
   difference = ((departure_time - DateTime.now) * 24 * 60 * 60).to_i
   # Calculate the minutes and seconds remaining
