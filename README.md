@@ -11,7 +11,6 @@ Example: `ruby nextbus.rb 'State Fair - Ltd Stop - Minneapolis - State Fair' 'de
 ## Code Walk-through
 We begin by performing basic validations on the arguments that were passed in. Errors are raised if one of the one of the following criteria are not met:
 * There must be exactly 3 arguments
-* The first two arguments must be strings
 * The third argument must be either 'north', south', 'east', or 'west'
 ```
 # Determine if we're at a good starting point with the arguments that were given
